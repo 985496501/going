@@ -1,0 +1,32 @@
+server:
+  port: 9999
+
+spring:
+  profiles:
+    active: test
+
+  main:
+    # dev 设置lazy-init, target at the specified bean, add @Lazy(false) to disable this configuration.
+    lazy-initialization: true
+  banner:
+    # other than UTF-8, set this. In addition to a text file, you can also add a picture(*.jpg, *.png) to your classpath
+    # or set the spring.banner.image.location property. MANIFEST.MF declares
+    charset: UTF-8
+
+  redis:
+    # host, password, port, database are default value.
+    host: localhost
+    password:
+    port: 6379
+    database: 0
+
+    lettuce:
+      pool:
+        min-idle: 1
+        max-active: 8
+    # TODO: redis-cluster
+#    sentinel:
+      # name of the master node.
+#      master:
+      # comma delimited list of host:port pairs.
+#      nodes:
