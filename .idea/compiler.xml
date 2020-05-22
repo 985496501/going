@@ -7,11 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="first-cache" />
         <module name="forth-swagger" />
-        <module name="fifth-guava" />
-        <module name="second-netty" />
+        <module name="first-cache" />
+        <module name="seventh-gateway" />
         <module name="third-security" />
+        <module name="second-netty" />
+        <module name="fifth-guava" />
+        <module name="sixth-common" />
       </profile>
     </annotationProcessing>
   </component>
@@ -22,6 +24,8 @@
       <module name="forth-swagger" options="-parameters" />
       <module name="going" options="-parameters" />
       <module name="second-netty" options="-parameters" />
+      <module name="seventh-gateway" options="-parameters" />
+      <module name="sixth-common" options="-parameters" />
       <module name="third-security" options="-parameters" />
     </option>
   </component>
