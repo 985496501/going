@@ -15,7 +15,7 @@ import java.util.Map;
  * @author jinyun liu
  * @date 2020/5/22
  */
-@Configuration
+//@Configuration
 public class PasswordEncoderConfig {
 
     /**
@@ -24,8 +24,10 @@ public class PasswordEncoderConfig {
      * @return
      */
     @Bean
-    public PasswordEncoder defaultDelegatingPasswordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    public PasswordEncoder passwordEncoder() {
+        // PasswordEncoder delegatingPasswordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        // It must be create an PasswordEncoder.
+        return NoOpPasswordEncoder.getInstance();
     }
 
    // @Bean
@@ -34,11 +36,11 @@ public class PasswordEncoderConfig {
     }
 
     //@Bean()
-    public DelegatingPasswordEncoder passwordEncoder() {
-        Map<String, PasswordEncoder> encoders = new HashMap<>(1);
-        encoders.put("argon2", new Argon2PasswordEncoder());
-        return new DelegatingPasswordEncoder("argon2", encoders);
-    }
+//    public DelegatingPasswordEncoder passwordEncoder() {
+//        Map<String, PasswordEncoder> encoders = new HashMap<>(1);
+//        encoders.put("argon2", new Argon2PasswordEncoder());
+//        return new DelegatingPasswordEncoder("argon2", encoders);
+//    }
 
     /**
      * create custom delegatingPasswordEncoder

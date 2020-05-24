@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring-boot?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password:
+    # Hikari 连接池配置
+    hikari:
+      minimum-idle: 5
+      # 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 180000
+      # 连接池最大连接数，默认是10
+      maximum-pool-size: 10
+      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      # 连接池名称
+      pool-name: MyHikariCP
+      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      # 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+# mybatis-plus的相关配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml # xml的存放位置
+  type-aliases-package: cn.yun.go.*.entity # 实体包的路径,在xml中直接使用类型
+
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true # 默认小驼峰映射
+    cache-enabled: false # 默认不适用二级缓存
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印sql 控制台有些废话
+  # 全局配置
+  global-config:
+    # 数据库配置
+    db-config:
+      id-type: id_worker # 主键生成策略
+      table-underline: true # 数据库表名下划线形式
+      logic-delete-field: deleted # 逻辑删除字段
+      logic-delete-value: 1 # 删除
+      logic-not-delete-value: 0 # 默认不删除
+      # insert-strategy:
+      # update-strategy:
+    banner: false # 不要打印logo

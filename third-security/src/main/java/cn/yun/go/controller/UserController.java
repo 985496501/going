@@ -5,10 +5,7 @@ import cn.yun.go.dto.UserDTO;
 import cn.yun.go.dto.UserRetrievePwdDTO;
 import cn.yun.go.vo.UserVO;
 import io.swagger.annotations.*;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -74,5 +71,11 @@ public class UserController {
         // 不写这个默认是表单consumes = "application/x-www-form-urlencoded",
         System.out.println(userRetrievePwdDTO);
         return new Results<>(200, "SUCCESS", userRetrievePwdDTO);
+    }
+
+    @GetMapping("login/{id}")
+    public String hello(@PathVariable Long id) {
+
+        return "hello security" + id;
     }
 }
