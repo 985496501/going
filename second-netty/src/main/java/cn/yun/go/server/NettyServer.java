@@ -8,23 +8,24 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * simplest netty server demo.
  * 核心: 1. 创建引导类, 2. 指定线程模型, 3. IO模型, 4. 连接读写处理逻辑, 5. 绑定端口
  * 服务端就起来了
  *
- *
  * @author jinyun liu
  * @date 2020/5/20
  */
+@Slf4j
 public class NettyServer {
     public static void main(String[] args) {
 
-            // create boss thread group to listen the request event of the port.
-            NioEventLoopGroup bossGroup = new NioEventLoopGroup();
-            // create worker thread group to handle the request.
-            NioEventLoopGroup workerGroup = new NioEventLoopGroup();
+        // create boss thread group to listen the request event of the port.
+        NioEventLoopGroup bossGroup = new NioEventLoopGroup();
+        // create worker thread group to handle the request.
+        NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
             // create a server bootstrap to start a convenient server.
@@ -53,6 +54,7 @@ public class NettyServer {
                                     System.out.println(msg);
                                 }
                             });
+                            ch.pipeline().addLast(new SimpleServerHandler());
                         }
                     });
 
@@ -112,8 +114,8 @@ public class NettyServer {
         }
 
         @Override
-        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-            super.exceptionCaught(ctx, cause);
+        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+            log.info("A socket client is closed...");
         }
     }
 }

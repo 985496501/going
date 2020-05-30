@@ -1,6 +1,7 @@
-package cn.yun.go.io;
+package cn.yun.go.io.bio;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.time.LocalDateTime;
@@ -16,8 +17,14 @@ public class IOClient {
             try (Socket socket = new Socket("127.0.0.1", 8000)) {
                 while (true) {
                     try {
-                        socket.getOutputStream().write((LocalDateTime.now() + ": hello world").getBytes());
-                        socket.getOutputStream().flush();
+                        // OutputStream的write(byte[]) --> this.foreach(write(byte[i]))
+                        OutputStream outputStream = socket.getOutputStream();
+                        // 实际上是调用的 not public SocketOutputStream的write(), socketWrite(byte[0], 0, 1)
+                        // native socketWrite0(): Write to the Socket.
+                        // 实际上就是一个一个byte的往socket写数据
+                        outputStream.write((LocalDateTime.now() + ": 您好").getBytes());
+                        // to do nothing.
+                        // outputStream.flush();
                         Thread.sleep(2000);
                     } catch (Exception e) {
                     }

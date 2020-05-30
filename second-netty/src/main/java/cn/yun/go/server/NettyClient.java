@@ -2,6 +2,7 @@ package cn.yun.go.server;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -28,7 +29,8 @@ public class NettyClient {
                     }
                 });
 
-        Channel channel = bootstrap.connect("127.0.0.1", 8000).channel();
+        ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 8000);
+        Channel channel = channelFuture.channel();
 
         while (true) {
             // channel write and flush right now.

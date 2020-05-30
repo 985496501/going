@@ -1,4 +1,4 @@
-package cn.yun.go.io;
+package cn.yun.go.io.bio;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,11 +49,12 @@ public class IOServer {
 
         ServerSocket serverSocket = new ServerSocket(8000);
 
-        // (1) 接收新连接线程
-        new Thread(() -> {
+        // (1) 接收新连接线程 创建一个子线程来接收线程 保护了主线程，这里使用主线程也是一样的
+//        new Thread(() -> {
+            // 死循环 CPU无脑扫描
             while (true) {
                 try {
-                    // (1) 阻塞方法获取新的连接
+                    // (1) 阻塞方法获取新的连接，使用的是操作系统级别的阻塞, 不消耗CPU的资源
                     Socket socket = serverSocket.accept();
 
                     // (2) 每一个新的连接都创建一个线程，负责读取数据
@@ -61,6 +62,10 @@ public class IOServer {
                         try {
                             byte[] data = new byte[1024];
                             InputStream inputStream = socket.getInputStream();
+                            // Once a socket connects to the server, there will create a new thread and a death-loop within it.
+                            // Death-loop is always watching the socket IO event, even thought there is no incoming IO event.
+                            // Problem: thread-tune, death-loop are exhausting the CPU resources.
+                            // How to solve?
                             while (true) {
                                 int len;
                                 // (3) 按字节流方式读取数据
@@ -76,7 +81,7 @@ public class IOServer {
                 }
 
             }
-        }).start();
+//        }).start();
     }
 
 

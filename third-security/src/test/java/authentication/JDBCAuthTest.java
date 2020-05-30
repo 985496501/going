@@ -16,5 +16,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class JDBCAuthTest {
     // JdbcDaoImpl impl UserDetailService to provide support for username/password based authentication
     // that is retrieved using JDBC. JdbcUserDetailsManager(impl) provide UserDetails.
-    //
+    // UserDetails based authentication is used by SpringSecurity when it is configured to accept a user/pwd for authentication.
+    // UserDetails is returned by the UserDetailsService.
+
+
+
+
+
+
+
+
+
+
+
+
 }
