@@ -1,4 +1,4 @@
-package cn.yun.go;
+package cn.yun.go.test;
 
 import org.junit.Test;
 
