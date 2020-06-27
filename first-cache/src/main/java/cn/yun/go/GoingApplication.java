@@ -1,15 +1,18 @@
 package cn.yun.go;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+/**
+ * https://github.com/alibaba/jetcache/wiki/RedisWithLettuce_CN
+ * 缓存服务继承写一个公共包，然后直接注入依赖就完事了。
+ * 这里继承 jetcache 和 redis lettuce.
+ *
+ */
 @SpringBootApplication
 public class GoingApplication {
     public static void main(String[] args) {
