@@ -16,6 +16,10 @@
         <module>fifth-guava</module>
         <module>sixth-common</module>
         <module>seventh-gateway</module>
+        <module>eighth-lecture</module>
+        <module>ninth-exception</module>
+        <module>tenth-socketio</module>
+        <module>eleventh-common</module>
     </modules>
 
 

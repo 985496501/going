@@ -1,11 +1,8 @@
 package cn.yun.go.test;
 
+
 import org.junit.Test;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -28,9 +25,6 @@ public class IOTest {
         // 3. 把这个输入写入输出流里面发出去 abstract class is the superclass of all classes representing
         // an output stream of bytes
         //OutputStream out = new BufferedOutputStream();
-
-
-
 
         // 3. 创建一个输入流往程序里面写入数据
         //

@@ -20,22 +20,46 @@ import java.util.Date;
  */
 public class NettyClient {
 
-    public static void main(String[] args) throws InterruptedException {
-        Bootstrap bootstrap = new Bootstrap();
+    public static void main(String[] args) {
         NioEventLoopGroup group = new NioEventLoopGroup();
 
-        bootstrap.group(group)
-                .channel(NioSocketChannel.class)
-                .handler(new ClientChannelInitializer());
+        try {
+            Bootstrap bootstrap = new Bootstrap();
+            bootstrap.group(group)
+                    .channel(NioSocketChannel.class)
+                    .handler(new ClientChannelInitializer());
 
-        ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 8999);
-        Channel channel = channelFuture.channel();
+            ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 8999);
+            channelFuture.addListener(k -> {
+                if (k.isSuccess()) {
+                    System.out.println("连接端口号为: 8999的netty server 已经成功！");
+                }
 
-        while (true) {
-            // channel write and flush right now.
-            channel.writeAndFlush(getLocalTime() + ": hello world!");
-            Thread.sleep(2000);
+                if (k.isDone()) {
+                    System.out.println("连接端口号为: 8999的netty server 已经结束！");
+                }
+
+                if (k.isCancellable()) {
+                    System.out.println("连接端口号为: 8999的netty server 是可以取消的！");
+                }
+
+                if (k.isCancelled()) {
+                    System.out.println("连接端口号为: 8999的netty server 已经取消！");
+                }
+            });
+
+            Channel channel = channelFuture.channel();
+
+//            while (true) {
+                // channel write and flush right now.
+                channel.writeAndFlush(getLocalTime() + ": hello world!");
+                Thread.sleep(2000);
+//            }
+            channel.close().sync();
+        } catch (Exception e) {
+            group.shutdownGracefully();
         }
+
     }
 
 
